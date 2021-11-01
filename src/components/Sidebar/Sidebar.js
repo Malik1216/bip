@@ -26,6 +26,7 @@ export default function Sidebar() {
           >
             Hi, Username
           </Link>
+          <p class="bg-lightBlue-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" style={{width:'fit-content'}} >Company</p>
           {/* User */}
           <ul className="md:hidden items-center flex flex-wrap list-none">
             <li className="inline-block relative">
@@ -103,8 +104,70 @@ export default function Sidebar() {
                   Dashboard
                 </Link>
               </li>
-
+              <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/analytics") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                  to="/admin/analytics"
+                >
+                  <i
+                    className={
+                      "fas fa-chart-line mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/analytics") !== -1
+                        ? "opacity-75"
+                        : "text-blueGray-300")
+                    }
+                  ></i>{" "}
+                  Analytics
+                </Link>
+              </li>
+              <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/history") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                  to="/admin/history"
+                >
+                  <i
+                    className={
+                      "fas fa-history mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/hostory") !== -1
+                        ? "opacity-75"
+                        : "text-blueGray-300")
+                    }
+                  ></i>{" "}
+                  History
+                </Link>
+              </li>
               {/* <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/dashboard") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                  to="/admin/dashboard"
+                >
+                  <i
+                    className={
+                      "fas fa-tv mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/dashboard") !== -1
+                        ? "opacity-75"
+                        : "text-blueGray-300")
+                    }
+                  ></i>{" "}
+                  Manage Products
+                </Link>
+              </li>
+               <li className="items-center">
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
@@ -126,7 +189,7 @@ export default function Sidebar() {
                 </Link>
               </li>
 
-              <li className="items-center">
+              <li className="items-center"> 
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
