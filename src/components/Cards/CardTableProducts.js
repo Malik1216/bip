@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 // components
 
@@ -27,7 +28,11 @@ export default function CardTable({ color }) {
                 Manage Products
               </h3>
             </div>
-            <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right"><button class="bg-lightBlue-500 text-white  text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"><i class="fas fa-plus"></i> Add New</button></div>
+            <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+            <Link to={`add_product`} activeClassName="active">
+                <button href="" class="bg-lightBlue-500 text-white  text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"><i class="fas fa-plus"></i> Add New</button>
+            </Link>
+              </div>
           </div>
         </div>
         

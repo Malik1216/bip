@@ -11,7 +11,7 @@ export default function Login() {
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="text-center mb-3">
                   <h1 className="text-blueGray-500 text-lg font-bold">
-                    Sign in
+                    Admin Sign in
                   </h1>
                 </div>
                 {/* <div className="btn-wrapper text-center">
@@ -48,12 +48,12 @@ export default function Login() {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Email
+                      Username
                     </label>
                     <input
                       type="email"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Email"
+                      placeholder="Username"
                     />
                   </div>
 
@@ -71,7 +71,7 @@ export default function Login() {
                     />
                   </div>
                   <div>
-                    <label className="inline-flex items-center cursor-pointer">
+                    {/* <label className="inline-flex items-center cursor-pointer">
                       <input
                         id="customCheckLogin"
                         type="checkbox"
@@ -80,7 +80,7 @@ export default function Login() {
                       <span className="ml-2 text-sm font-semibold text-blueGray-600">
                         Remember me
                       </span>
-                    </label>
+                    </label> */}
                   </div>
 
                   <div className="text-center mt-6">
@@ -96,7 +96,7 @@ export default function Login() {
                 </form>
               </div>
             </div>
-            <div className="flex flex-wrap mt-6 relative">
+            {/* <div className="flex flex-wrap mt-6 relative">
               <div className="w-1/2">
                 <a
                   href="#pablo"
@@ -111,7 +111,7 @@ export default function Login() {
                   <small>Create new account</small>
                 </Link>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

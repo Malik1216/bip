@@ -17,6 +17,7 @@ import Tables from "views/admin/Tables.js";
 import History from "views/admin/History.js";
 import Analytics from "views/admin/Analytics.js";
 import ManageProducts from "views/admin/ManageProducts";
+import AddProduct from "views/admin/AddProduct";
 
 export default function Admin() {
   return (
@@ -35,6 +36,7 @@ export default function Admin() {
             <Route path="/admin/history" exact component={History} />
             <Route path="/admin/analytics" exact component={Analytics} />
             <Route path="/admin/manage_products" exact component={ManageProducts} />
+            <Route path="/admin/add_product" exact component={AddProduct} />
             <Redirect from="/admin" to="/admin/dashboard" />
           </Switch>
           <FooterAdmin />
