@@ -1,7 +1,70 @@
-import React from "react";
+import React , {Component} from "react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import https from 'https';
+
+
+
+
 
 export default function Login() {
+
+      this.state = { admin: '' };
+     
+  
+
+  function login()
+  {
+    var uname  = document.getElementById("uname").value;
+    var pass  = document.getElementById("pass").value;
+    if (uname==='')
+    {
+      document.getElementById('uname-error').style.display = 'block';
+    }
+    else
+    {
+      document.getElementById('uname-error').style.display = 'none';
+    }
+    if (pass==='')
+    {
+      document.getElementById('pass-error').style.display = 'block';
+    }
+    else
+    {
+      document.getElementById('pass-error').style.display = 'none';
+    }
+    if ( uname!=='' && pass!=='')
+    {
+      const instance = axios.create({
+        httpsAgent: new https.Agent({  
+          rejectUnauthorized: false
+        })
+      });
+      instance.get('https://api-node-bi.mojodynamics.site/admin');
+      
+      // At request level
+      const agent = new https.Agent({  
+        rejectUnauthorized: false
+      });
+      const data = { email: uname , password : pass };
+      axios.post('https://api-node-bi.mojodynamics.site/admin', data , { httpsAgent: agent }) 
+          .then(res =>{
+            var data = res.data;
+            if (data.length===0)
+            {
+              console.log("invalid");
+            }
+            else
+            {
+              console.log(data[0]['username']);
+              this.setState({ admin:data[0]['username']})
+            }
+            
+            //  this.setState({ articleId: res.data.id });
+            });
+    }
+    
+  }
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -51,16 +114,18 @@ export default function Login() {
                       Username
                     </label>
                     <input
-                      type="email"
+                      type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Username"
+                      id="uname"
                     />
                   </div>
-
+                  <p style={{color:"red" ,  marginTop : "-10px" , marginBottom : "10px" , display : "none" , fontSize : "12px" }} id ="uname-error" >This field is required</p>
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
+                      
                     >
                       Password
                     </label>
@@ -68,7 +133,9 @@ export default function Login() {
                       type="password"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Password"
+                      id="pass"
                     />
+                      <p style={{color:"red" ,   marginBottom : "10px" , display : "none" , fontSize : "12px"  }} id ="pass-error" >This field is required</p>
                   </div>
                   <div>
                     {/* <label className="inline-flex items-center cursor-pointer">
@@ -87,10 +154,12 @@ export default function Login() {
                     <button
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="button"
+                      onClick={login}
                     >
-                      <Link to="/admin/dashboard" className="text-blueGray-200">
+                       <small>Sign In</small>
+                      {/* <Link to="/admin/dashboard" className="text-blueGray-200">
                   <small>Sign In</small>
-                </Link>
+                </Link> */}
                     </button>
                   </div>
                 </form>
@@ -118,3 +187,4 @@ export default function Login() {
     </>
   );
 }
+
