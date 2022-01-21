@@ -7,13 +7,43 @@ import https from 'https';
 
 
 
-export default function Login() {
+class Login extends Component {
 
-      this.state = { admin: '' };
-     
+
+  //state = { admin: 0 }
+  constructor(props) {
+    super(props);
   
+    // const instance = axios.create({
+    //   httpsAgent: new https.Agent({  
+    //     rejectUnauthorized: false
+    //   })
+    // });
+    // instance.get('https://api-node-bi.mojodynamics.site/session');
+    
+    // const agent = new https.Agent({  
+    //   rejectUnauthorized: false
+    // });
 
-  function login()
+    // axios.get('https://api-node-bi.mojodynamics.site/session' , { httpsAgent: agent }) 
+    axios.get('https://api-node-bi.mojodynamics.site/session' ) 
+        .then(res =>{
+          var data = res.data;
+          console.log(data);
+          if (data.user=== '')
+          {
+            console.log("Session not set");
+          }
+          else
+          {
+            console.log("Session set");
+          }
+        });
+    
+
+  } 
+
+  login()
   {
     var uname  = document.getElementById("uname").value;
     var pass  = document.getElementById("pass").value;
@@ -35,29 +65,36 @@ export default function Login() {
     }
     if ( uname!=='' && pass!=='')
     {
-      const instance = axios.create({
-        httpsAgent: new https.Agent({  
-          rejectUnauthorized: false
-        })
-      });
-      instance.get('https://api-node-bi.mojodynamics.site/admin');
+      // const instance = axios.create({
+      //   httpsAgent: new https.Agent({  
+      //     rejectUnauthorized: false
+      //   })
+      // });
+      // instance.get('https://api-node-bi.mojodynamics.site/admin');
       
-      // At request level
-      const agent = new https.Agent({  
-        rejectUnauthorized: false
-      });
+     
+      // const agent = new https.Agent({  
+      //   rejectUnauthorized: false
+      // });
       const data = { email: uname , password : pass };
-      axios.post('https://api-node-bi.mojodynamics.site/admin', data , { httpsAgent: agent }) 
+      //axios.post('https://api-node-bi.mojodynamics.site/admin', data , { httpsAgent: agent }) 
+      axios.post('https://api-node-bi.mojodynamics.site/admin', data ) 
           .then(res =>{
             var data = res.data;
             if (data.length===0)
             {
               console.log("invalid");
+              document.getElementById("error").style.display = 'block';
+              setTimeout(function(){
+                document.getElementById("error").style.display = 'none';
+             }, 3000);
             }
             else
             {
               console.log(data[0]['username']);
-              this.setState({ admin:data[0]['username']})
+              document.getElementById("error").style.display = 'none';
+             // this.setState({ admin: 1 });
+              window.location.href = "http://localhost:3000/admin/dashboard";
             }
             
             //  this.setState({ articleId: res.data.id });
@@ -65,8 +102,11 @@ export default function Login() {
     }
     
   }
-  return (
-    <>
+  
+
+
+     render() {
+      return (
       <div className="container mx-auto px-4 h-full">
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-4/12 px-4">
@@ -77,6 +117,7 @@ export default function Login() {
                     Admin Sign in
                   </h1>
                 </div>
+               
                 {/* <div className="btn-wrapper text-center">
                   <button
                     className="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
@@ -102,7 +143,11 @@ export default function Login() {
                   </button>
                 </div> */}
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
+                <div className="alert alert-success" id="error"  style={{color:"red" , padding:"10px", marginTop:"15px" , background:"white" , borderRadius:"5px" , display:"none" , marginLeft:"10px" , marginRight:"10px" }} >
+                  <strong>Error!</strong> Invalid Username or Password.
+                </div>
               </div>
+              
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
               
                 <form>
@@ -154,7 +199,7 @@ export default function Login() {
                     <button
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="button"
-                      onClick={login}
+                      onClick={this.login.bind()}
                     >
                        <small>Sign In</small>
                       {/* <Link to="/admin/dashboard" className="text-blueGray-200">
@@ -184,7 +229,10 @@ export default function Login() {
           </div>
         </div>
       </div>
-    </>
+    
   );
 }
+}
+
+export default Login;
 
