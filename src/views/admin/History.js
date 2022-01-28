@@ -12,9 +12,7 @@ export default function Tables() {
         <div className="w-full mb-12 px-4">
           <CardTableProductHistory1 color="dark" />
         </div>
-        <div className="w-full mb-12 px-4">
-          <CardTableProductHistory />
-        </div>
+   
         
       </div>
     </>

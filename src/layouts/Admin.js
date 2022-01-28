@@ -20,6 +20,8 @@ import ManageProducts from "views/admin/ManageProducts";
 import AddProduct from "views/admin/AddProduct";
 
 export default function Admin() {
+  
+  
   return (
     <>
       <Sidebar />

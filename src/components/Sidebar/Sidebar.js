@@ -2,11 +2,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+
 import NotificationDropdown from "components/Dropdowns/NotificationDropdown.js";
 import UserDropdown from "components/Dropdowns/UserDropdown.js";
 
 export default function Sidebar() {
+
   const [collapseShow, setCollapseShow] = React.useState("hidden");
+  var admin = sessionStorage.getItem("admin");
+  
+    if (admin!=='1')
+    {
+      window.location.href = "../../";
+    }
+    function signout()
+    {
+      sessionStorage.setItem("admin"  , 0);
+      window.location.href = "../../";
+    }
+ 
   return (
     <>
       <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
@@ -122,7 +136,28 @@ export default function Sidebar() {
                         : "text-blueGray-300")
                     }
                   ></i>{" "}
-                  Analytics
+                  Geological Analysis
+                </Link>
+              </li>
+              <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/add_product") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                  to="/admin/add_product"
+                >
+                  <i
+                    className={
+                      "fas fa-chart-line mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/add_product") !== -1
+                        ? "opacity-75"
+                        : "text-blueGray-300")
+                    }
+                  ></i>{" "}
+                  Graphical Analysis
                 </Link>
               </li>
               <li className="items-center">
@@ -146,27 +181,7 @@ export default function Sidebar() {
                   History
                 </Link>
               </li>
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/add_product") !== -1
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                  to="/admin/add_product"
-                >
-                  <i
-                    className={
-                      "fas fa-plus mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/add_product") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
-                    }
-                  ></i>{" "}
-                  Add Product
-                </Link>
-              </li>
+           
 
 
               <li className="items-center">
@@ -210,7 +225,32 @@ export default function Sidebar() {
                   ></i>{" "}
                   Settings
                 </Link>
+                
               </li>
+              <li className="items-center">
+                <button
+                 onClick={ () => signout()}
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (window.location.href.indexOf("/admin/settings") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                  
+                >
+                  <i
+                    className={
+                      "fas fa-sign-out-alt mr-2 text-sm " +
+                      (window.location.href.indexOf("/admin/settings") !== -1
+                        ? "opacity-75"
+                        : "text-blueGray-300")
+                    }
+                  ></i>{" "}
+                  Log Out
+                </button>
+                
+              </li>
+              
               {/* <li className="items-center">
                 <Link
                   className={

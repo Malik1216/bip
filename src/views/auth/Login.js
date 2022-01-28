@@ -1,7 +1,9 @@
 import React , {Component} from "react";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import axios from 'axios';
 import https from 'https';
+
 
 
 
@@ -10,36 +12,20 @@ import https from 'https';
 class Login extends Component {
 
 
-  //state = { admin: 0 }
+  
   constructor(props) {
     super(props);
-  
-    // const instance = axios.create({
-    //   httpsAgent: new https.Agent({  
-    //     rejectUnauthorized: false
-    //   })
-    // });
-    // instance.get('https://api-node-bi.mojodynamics.site/session');
-    
-    // const agent = new https.Agent({  
-    //   rejectUnauthorized: false
-    // });
 
-    // axios.get('https://api-node-bi.mojodynamics.site/session' , { httpsAgent: agent }) 
-    axios.get('https://api-node-bi.mojodynamics.site/session' ) 
-        .then(res =>{
-          var data = res.data;
-          console.log(data);
-          if (data.user=== '')
-          {
-            console.log("Session not set");
-          }
-          else
-          {
-            console.log("Session set");
-          }
-        });
     
+    var admin = sessionStorage.getItem("admin");
+  
+    if (admin==='1')
+    {
+      this.props.history.push("admin/dashboard");
+     
+    }
+ 
+   
 
   } 
 
@@ -65,40 +51,37 @@ class Login extends Component {
     }
     if ( uname!=='' && pass!=='')
     {
-      // const instance = axios.create({
-      //   httpsAgent: new https.Agent({  
-      //     rejectUnauthorized: false
-      //   })
-      // });
-      // instance.get('https://api-node-bi.mojodynamics.site/admin');
-      
-     
-      // const agent = new https.Agent({  
-      //   rejectUnauthorized: false
-      // });
-      const data = { email: uname , password : pass };
-      //axios.post('https://api-node-bi.mojodynamics.site/admin', data , { httpsAgent: agent }) 
-      axios.post('https://api-node-bi.mojodynamics.site/admin', data ) 
-          .then(res =>{
-            var data = res.data;
-            if (data.length===0)
-            {
-              console.log("invalid");
-              document.getElementById("error").style.display = 'block';
-              setTimeout(function(){
-                document.getElementById("error").style.display = 'none';
-             }, 3000);
-            }
-            else
-            {
-              console.log(data[0]['username']);
-              document.getElementById("error").style.display = 'none';
-             // this.setState({ admin: 1 });
-              window.location.href = "http://localhost:3000/admin/dashboard";
-            }
-            
-            //  this.setState({ articleId: res.data.id });
-            });
+        document.getElementById("login_btn").innerHTML="Loading ... ";
+        document.getElementById("login_btn").disabled = true;
+       fetch('https://api-node-bl.mojodynamics.site/login?uname='+uname+'&pass='+pass+'' ,{
+        method: 'get',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+  
+      } ).then(result => result.json())
+       .then(data => {
+          if (data.result==='true')
+          {
+           console.log( "Loging in" );
+           document.getElementById("login_btn").innerHTML="Sign in";
+           document.getElementById("login_btn").disabled = false;
+           sessionStorage.setItem("admin" , 1 );
+           
+           window.location.href = "admin/dashboard";
+          }
+          else
+          {
+           
+            document.getElementById("error").style.display = 'block';
+                    setTimeout(function(){
+                      document.getElementById("error").style.display = 'none';
+                   }, 3000);
+            document.getElementById("login_btn").innerHTML="Sign in";
+            document.getElementById("login_btn").disabled = false;
+          }
+       });
+   
     }
     
   }
@@ -199,6 +182,7 @@ class Login extends Component {
                     <button
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="button"
+                      id ="login_btn"
                       onClick={this.login.bind()}
                     >
                        <small>Sign In</small>

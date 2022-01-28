@@ -10,7 +10,26 @@ export default function CardStats({
   statDescripiron,
   statIconName,
   statIconColor,
-}) {
+  
+
+})
+
+
+
+
+{
+  const [count, setCount] = React.useState('0');
+  fetch('https://api-node-bl.mojodynamics.site/get_total_vists.php' ,{
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  
+  } ).then(result => result.json())
+   .then(data => {
+     document.getElementById("trafic_count").innerHTML = data.result;
+    //setCount( data.result);
+   });
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
@@ -20,8 +39,8 @@ export default function CardStats({
               <h5 className="text-blueGray-400 uppercase font-bold text-xs">
                 {statSubtitle}
               </h5>
-              <span className="font-semibold text-xl text-blueGray-700">
-                {statTitle}
+              <span className="font-semibold text-xl text-blueGray-700" id ="trafic_count" >
+                {count}
               </span>
             </div>
             <div className="relative w-auto pl-4 flex-initial">
@@ -59,8 +78,7 @@ export default function CardStats({
 CardStats.defaultProps = {
   statSubtitle: "Traffic",
   statTitle: "350,897",
-  statArrow: "up",
-  statPercent: "3.48",
+
   statPercentColor: "text-emerald-500",
   statDescripiron: "Since last month",
   statIconName: "far fa-chart-bar",
