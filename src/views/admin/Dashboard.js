@@ -63,9 +63,8 @@ export default function Dashboard() {
 
 
     <div style={{marginBottom:"50px" , width:"100%"}} >
-      <button class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" id="edit" style={{float:"right" , marginBottom:"30px", height:"40px" , marginRight:"20px" }}  onClick={ () => edit()} ><i className="fas fa-tools"></i>&nbsp;Edit Dashboard</button>
-      <button class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 remove_btn" type="button" id="edit" style={{float:"right" , marginBottom:"30px", height:"40px" , marginRight:"20px" , display:"none" }}  onClick={ () => save()} ><i className="fas fa-check"></i>&nbsp;Save</button>
-      <button class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 remove_btn" type="button" id="edit" style={{float:"right" , marginBottom:"30px", height:"40px" , marginRight:"20px" , display:"none" }}  onClick={ () => edit()} ><i className="fas fa-plus"></i>&nbsp;Add widget</button>
+      <a href="https://ms-network.mojodynamics.site/admin/login.php" class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" id="edit" style={{float:"right" , marginBottom:"30px", marginRight:"20px" }}  >Go to Admin panel</a>
+
    </div>
     </>
   );

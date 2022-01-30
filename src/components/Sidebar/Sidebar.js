@@ -26,29 +26,22 @@ export default function Sidebar() {
       <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
         <div className="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
           {/* Toggler */}
-          <button
-            className="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
-            type="button"
-            onClick={() => setCollapseShow("bg-white m-2 py-3 px-6")}
-          >
-            <i className="fas fa-bars"></i>
-          </button>
+      
           {/* Brand */}
           <Link
             className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
             to="/"
           >
-            Hi, Username
+            Welcome Back,<br></br>
+            <span style={{fontSize:"12px" , fontWeight:"500"}} >MS Networks & It solutions</span>
           </Link>
-          <p class="bg-lightBlue-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" style={{width:'fit-content'}} >Company</p>
+         
           {/* User */}
           <ul className="md:hidden items-center flex flex-wrap list-none">
-            <li className="inline-block relative">
+            {/* <li className="inline-block relative">
               <NotificationDropdown />
-            </li>
-            <li className="inline-block relative">
-              <UserDropdown />
-            </li>
+            </li> */}
+           
           </ul>
           {/* Collapse */}
           <div
@@ -130,13 +123,13 @@ export default function Sidebar() {
                 >
                   <i
                     className={
-                      "fas fa-chart-line mr-2 text-sm " +
+                      "fas fa-map-marker mr-2 text-sm " +
                       (window.location.href.indexOf("/admin/analytics") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
                     }
                   ></i>{" "}
-                  Geological Analysis
+                  Geospatial Mapping
                 </Link>
               </li>
               <li className="items-center">
@@ -157,7 +150,7 @@ export default function Sidebar() {
                         : "text-blueGray-300")
                     }
                   ></i>{" "}
-                  Graphical Analysis
+                  Profit Analysis
                 </Link>
               </li>
               <li className="items-center">
@@ -178,7 +171,7 @@ export default function Sidebar() {
                         : "text-blueGray-300")
                     }
                   ></i>{" "}
-                  History
+                  Sales History
                 </Link>
               </li>
            
@@ -202,31 +195,10 @@ export default function Sidebar() {
                         : "text-blueGray-300")
                     }
                   ></i>{" "}
-                  Manage Products
+                  Product Analysis
                 </Link>
               </li>
-              <li className="items-center">
-                <Link
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (window.location.href.indexOf("/admin/settings") !== -1
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                  to="/admin/settings"
-                >
-                  <i
-                    className={
-                      "fas fa-tools mr-2 text-sm " +
-                      (window.location.href.indexOf("/admin/settings") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
-                    }
-                  ></i>{" "}
-                  Settings
-                </Link>
-                
-              </li>
+             
               <li className="items-center">
                 <button
                  onClick={ () => signout()}

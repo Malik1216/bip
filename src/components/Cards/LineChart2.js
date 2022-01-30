@@ -3,7 +3,7 @@ import Chart from "chart.js";
 
 export default function LineChart2() {
 
-   fetch('https://api-node-bl.mojodynamics.site/line_chart?months=12&year=2022' ,{
+   fetch('https://api-node-bl.mojodynamics.site/get_sales_analysis?months=12&year=2022' ,{
         method: 'get',
         headers: {
           'Content-Type': 'application/json'
@@ -12,12 +12,14 @@ export default function LineChart2() {
       } ).then(result => result.json())
        .then(data => {
        
-        var data1 = [parseInt(data.result[0]['count']) , parseInt(data.result[1]['count']) , parseInt(data.result[2]['count']) , parseInt(data.result[3]['count']) , parseInt(data.result[4]['count']) , parseInt(data.result[5]['count']) , parseInt(data.result[6]['count']), parseInt(data.result[7]['count']), parseInt(data.result[8]['count']), parseInt(data.result[9]['count']), parseInt(data.result[10]['count']), parseInt(data.result[11]['count']) ];
-        fetch('https://api-node-bl.mojodynamics.site/line_chart?months=12&year=2021' ,{
+        var data1 = [parseInt(data.result[0]['profit']) , parseInt(data.result[1]['profit']) , parseInt(data.result[2]['profit']) , parseInt(data.result[3]['profit']) , parseInt(data.result[4]['profit']) , parseInt(data.result[5]['profit']) , parseInt(data.result[6]['profit']), parseInt(data.result[7]['profit']), parseInt(data.result[8]['profit']), parseInt(data.result[9]['profit']), parseInt(data.result[10]['profit']), parseInt(data.result[11]['profit']) ];
+        console.log(data1);
+        fetch('https://api-node-bl.mojodynamics.site/line_chart?months=12&year=2022' ,{
           method: 'get',
           headers: {
             'Content-Type': 'application/json'
           }
+          
     
         } ).then(result => result.json())
          .then(data => {
@@ -41,14 +43,14 @@ export default function LineChart2() {
             ],
             datasets: [
               {
-                label: new Date().getFullYear(),
+                label: "Profit",
                 backgroundColor: "#4c51bf",
                 borderColor: "#4c51bf",
                 data: data1,
                 fill: false,
               },
               {
-                label: new Date().getFullYear() - 1,
+                label: "Sale",
                 fill: false,
                 backgroundColor: "#fff",
                 borderColor: "#fff",
@@ -61,7 +63,7 @@ export default function LineChart2() {
             responsive: true,
             title: {
               display: false,
-              text: "Sales Charts",
+              text: "Profit Analysis",
               fontColor: "white",
             },
             legend: {
@@ -253,9 +255,9 @@ export default function LineChart2() {
           <div className="flex flex-wrap items-center">
             <div className="relative w-full max-w-full flex-grow flex-1">
               <h6 className="uppercase text-blueGray-100 mb-1 text-xs font-semibold">
-              Overview
+              Analysis
               </h6>
-              <h2 className="text-white text-xl font-semibold">Sales value</h2>
+              <h2 className="text-white text-xl font-semibold">Profit Analysis of this year</h2>
             </div>
           </div>
         </div>

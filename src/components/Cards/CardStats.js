@@ -18,8 +18,9 @@ export default function CardStats({
 
 
 {
+  console.log(statSubtitle);
   const [count, setCount] = React.useState('0');
-  fetch('https://api-node-bl.mojodynamics.site/get_total_vists.php' ,{
+  fetch('https://api-node-bl.mojodynamics.site/get_total_vists.php?title='+ statSubtitle ,{
     method: 'get',
     headers: {
       'Content-Type': 'application/json'
@@ -27,8 +28,8 @@ export default function CardStats({
   
   } ).then(result => result.json())
    .then(data => {
-     document.getElementById("trafic_count").innerHTML = data.result;
-    //setCount( data.result);
+     //document.getElementById("trafic_count"+statSubtitle).innerHTML = data.result['count'];
+    setCount( data.result['count']);
    });
   return (
     <>
@@ -39,7 +40,7 @@ export default function CardStats({
               <h5 className="text-blueGray-400 uppercase font-bold text-xs">
                 {statSubtitle}
               </h5>
-              <span className="font-semibold text-xl text-blueGray-700" id ="trafic_count" >
+              <span className="font-semibold text-xl text-blueGray-700" id ="trafic_count{statSubtitle}" >
                 {count}
               </span>
             </div>
@@ -54,21 +55,7 @@ export default function CardStats({
               </div>
             </div>
           </div>
-          <p className="text-sm text-blueGray-400 mt-4">
-            <span className={statPercentColor + " mr-2"}>
-              <i
-                className={
-                  statArrow === "up"
-                    ? "fas fa-arrow-up"
-                    : statArrow === "down"
-                    ? "fas fa-arrow-down"
-                    : ""
-                }
-              ></i>{" "}
-              {statPercent}%
-            </span>
-            <span className="whitespace-nowrap">{statDescripiron}</span>
-          </p>
+       
         </div>
       </div>
     </>
